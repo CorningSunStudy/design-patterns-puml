@@ -1,0 +1,31 @@
+@startuml
+interface Product {
+  +abstract void use()
+}
+
+class ProductA {
+  +void use()
+}
+
+class ProductB {
+  +void use()
+}
+
+Product <|.. ProductA
+Product <|.. ProductB
+
+class Factory {
+  +Product createProduct(string)
+}
+note left
+if (arg == "A") {
+  return new FactoryA();
+} else if (arg == "B") {
+  return new FactoryB();
+}
+end note
+
+ProductA <.. Factory
+ProductB <.. Factory
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+interface Troll {
+  + {static} attack();
+  + {static} int getAttackPower();
+  + {static} fleeBattle();
+}
+
+class SimpleTroll {
+  + attack();
+  + int getAttackPower();
+  + fleeBattle();
+}
+
+Troll <|.. SimpleTroll
+
+class ClubbedTroll {
+  - Troll decorated
+  + ClubbedTroll(Troll decorated)
+  + attack();
+  + int getAttackPower();
+  + fleeBattle();
+}
+note left
+@Override
+public void attack() {
+  decorated.attack();
+  LOGGER.info("The troll swings at you with a club!");
+}
+
+@Override
+public int getAttackPower() {
+  return decorated.getAttackPower() + 10;
+}
+
+@Override
+public void fleeBattle() {
+  decorated.fleeBattle();
+}
+end note
+
+Troll <|.. ClubbedTroll
+Troll <--o ClubbedTroll
+
+@enduml

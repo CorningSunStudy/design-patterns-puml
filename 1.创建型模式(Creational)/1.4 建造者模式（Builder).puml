@@ -1,0 +1,45 @@
+@startuml
+
+class Product {
+  - PartA partA
+  - PartB partB
+  - PartC partC
+  + getters()
+  + setters()
+}
+
+abstract Builder {
+  - Product product
+  + {abstract} buildPartA()
+  + {abstract} buildPartB()
+  + {abstract} buildPartC()
+  + Product getResult()
+}
+
+Product <-- Builder
+
+class ConcreteBuilder {
+  + buildPartA()
+  + buildPartB()
+  + buildPartC()
+}
+
+Builder <|.. ConcreteBuilder
+
+class Director {
+  - Builder builder
+  + setBuilder(Builder)
+  + Product construct()
+}
+note left
+public Product construct() {
+  builder.buildPartA();
+  builder.buildPartB();
+  builder.buildPartC();
+  return builder.getResult();
+}
+end note
+
+Builder <--o Director
+
+@enduml

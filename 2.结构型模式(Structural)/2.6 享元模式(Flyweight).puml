@@ -1,0 +1,35 @@
+@startuml
+
+interface Flyweight {
+  + {static} void operation()
+}
+
+class ConcreteFlyweight {
+  - int intrinsicState
+  + void operation()
+}
+
+class UnsharedConcreteFlyweight {
+  - int allState
+  + void operation()
+}
+
+Flyweight <|.. ConcreteFlyweight
+Flyweight <|.. UnsharedConcreteFlyweight
+
+class FlyweightFactory {
+  - Map<String, Flyweight> mpFlyweight
+  + Flyweight getFlyweight(String)
+}
+note bottom
+public Flyweight getFlyweight(String string) {
+  if (!mpFlyweight.containsKey(string)) {
+    mpFlyweight.put(string, new ConcreteFlyweight());
+  }
+  return mpFlyweight.get(string);
+}
+end note
+
+Flyweight <--o FlyweightFactory
+
+@enduml

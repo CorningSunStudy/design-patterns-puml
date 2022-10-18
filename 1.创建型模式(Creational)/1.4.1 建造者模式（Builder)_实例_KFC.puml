@@ -1,0 +1,43 @@
+@startuml
+
+class Meal {
+  - String food
+  - String drink
+  + String getFood()
+  + String getDrink()
+  + setFood()
+  + setDrink()
+}
+
+abstract MealBuilder {
+  - Meal meal
+  + {abstract} buildFood()
+  + {abstract} buildDrink()
+  + Meal getMeal()
+}
+
+Meal <-- MealBuilder
+
+class MealBuilderA {
+  + buildFood()
+  + buildDrink()
+}
+
+MealBuilder <|.. MealBuilderA
+
+class MealBuilderB {
+  + buildFood()
+  + buildDrink()
+}
+
+MealBuilder <|.. MealBuilderB
+
+class KFCWatier {
+  - MealBuilder mb
+  + setMealBuilder(MealBuilder mb)
+  + Meal construct()
+}
+
+MealBuilder <--lefto KFCWatier
+
+@enduml

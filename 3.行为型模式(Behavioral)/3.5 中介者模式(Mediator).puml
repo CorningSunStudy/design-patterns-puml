@@ -1,0 +1,33 @@
+@startuml
+abstract Colleague {
+  + void receivemsg()
+  + {static} void sendmsg()
+  + void setMediator(Mediator mediator)
+}
+
+class ConcretecolleagueA {
+  + void sendmsg()
+}
+
+class ConcretecolleagueB {
+  + void sendmsg()
+}
+
+Colleague <|-- ConcretecolleagueA
+Colleague <|-- ConcretecolleagueB
+
+abstract Mediator {
+  + {static} void operation()
+  + void register(Colleague colleague)
+}
+
+Colleague <--o Mediator
+Mediator <-- Colleague
+
+class ConcreteMediator {
+  + void operation()
+}
+
+Mediator <|-- ConcreteMediator
+
+@enduml

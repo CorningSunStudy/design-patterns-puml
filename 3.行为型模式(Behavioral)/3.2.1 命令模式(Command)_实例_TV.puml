@@ -1,0 +1,39 @@
+@startuml
+
+class Televation {
+  + void off()
+  + void open()
+}
+
+interface Command {
+  + {static} void execute()
+}
+
+class TVOpenCommand {
+  - Televation televation
+  + void execute()
+}
+
+class TVCloseCommand {
+  - Televation televation
+  + void execute()
+}
+
+Command <|.. TVOpenCommand
+Command <|.. TVCloseCommand
+
+Televation <-- TVOpenCommand
+Televation <-- TVCloseCommand
+
+class Controller {
+  + void off()
+  + void open()
+}
+note top
+遥控器由开、关等按钮组成，
+并实现对电视的遥控。
+end note
+
+Command <--o Controller
+
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+
+interface Enchantment {
+  + {static} onActivate()
+  + {static} apply()
+  + {static} onDeactivate()
+}
+
+class FlyingEnchantment {
+  + onActivate()
+  + apply()
+  + onDeactivate()
+}
+
+Enchantment <|.. FlyingEnchantment
+
+class SoulEatingEnchantment {
+  + onActivate()
+  + apply()
+  + onDeactivate()
+}
+
+Enchantment <|.. SoulEatingEnchantment
+
+interface Weapon {
+  + {static} wield()
+  + {static} swing()
+  + {static} unwield()
+  + Enchantment getEnchantment()
+}
+
+Enchantment <--o Weapon
+
+class Hammer {
+  - Enchantment enchantment
+  + Hammer(Enchantment)
+  + wield()
+  + swing()
+  + unwield()
+  + Enchantment getEnchantment()
+}
+
+Weapon <|.. Hammer
+
+class Sword {
+  - Enchantment enchantment
+  + Sword(Enchantment)
+  + wield()
+  + swing()
+  + unwield()
+  + Enchantment getEnchantment()
+}
+
+Weapon <|.. Sword
+
+class App {
+  + {static} main()
+}
+
+Weapon <.. App
+
+@enduml

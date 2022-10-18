@@ -1,0 +1,48 @@
+@startuml
+
+class Receiver {
+  + void action()
+}
+
+interface Command {
+  + {static} void execute()
+}
+
+class ConcreteCommand {
+  - Receiver receiver
+  + ConcreteCommand(Receiver receiver)
+  + void execute()
+}
+note bottom
+public void execute() {
+  receiver.action();
+}
+end note
+
+Command <|.. ConcreteCommand
+Receiver <-- ConcreteCommand
+
+class Invoker {
+  - Command command
+  + Invoker(Command command)
+  + void call()
+}
+note left
+public void call() {
+  command.execute();
+}
+end note
+
+Command <--o Invoker
+
+class Client
+note bottom
+Receiver receiver = new Receiver();
+ConcreteCommand command = new ConcreteCommand(receiver);
+Invoker invoker = new Invoker(command);
+invoker.call();
+end note
+
+Invoker <.. Client
+
+@enduml

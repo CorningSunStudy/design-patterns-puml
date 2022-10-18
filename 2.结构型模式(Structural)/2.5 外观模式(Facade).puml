@@ -1,0 +1,25 @@
+@startuml
+
+class SystemA {
+  + void operationA()
+}
+
+class SystemB {
+  + void operationB()
+}
+
+class SystemC {
+  + void operationC()
+}
+
+class Facade {
+  + void wrapOperation()
+}
+
+Facade --> SystemA
+Facade --> SystemB
+Facade --> SystemC
+
+Client ..> Facade
+
+@enduml

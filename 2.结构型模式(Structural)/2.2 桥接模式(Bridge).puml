@@ -1,0 +1,35 @@
+@startuml
+
+interface Implementor {
+  + {static} operationImp()
+}
+
+class ConcreteImplementorA {
+  + operationImp()
+}
+
+class ConcreteImplementorB {
+  + operationImp()
+}
+
+Implementor <|.. ConcreteImplementorA
+Implementor <|.. ConcreteImplementorB
+
+abstract Abstraction {
+  - Implementor implementor
+  + Abstraction(Implementor)
+  + {static} operation()
+}
+
+Implementor <--o Abstraction
+
+class RefinedAbstraction {
+  + RefinedAbstraction(Implementor)
+  + operation()
+}
+
+Abstraction <|-- RefinedAbstraction
+
+Abstraction <.. Client
+
+@enduml

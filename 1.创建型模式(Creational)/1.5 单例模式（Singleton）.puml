@@ -1,0 +1,20 @@
+@startuml
+
+class Singleton {
+  - {static} Singleton instance
+  + {static} Singleton getInstance()
+  - Singleton()
+  + singletonOperation()
+}
+note left
+public static Singleton getInstance() {
+  if (instance == null) {
+    instance = new Singleton();
+  }
+  return instance
+}
+end note
+
+Singleton o--> Singleton: instance
+
+@enduml

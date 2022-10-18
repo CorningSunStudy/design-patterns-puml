@@ -1,0 +1,41 @@
+@startuml
+
+abstract Log {
+  + writeLog()
+}
+
+class FileLog {
+  + writeLog()
+}
+
+class DatabaseLog {
+  + writeLog()
+}
+
+Log <|.. FileLog
+Log <|.. DatabaseLog
+
+abstract LogFactory {
+  + Log createLog()
+}
+
+class FileLogFactory {
+  + Log createLog()
+}
+
+class DatabaseLogFactory {
+  + Log createLog()
+}
+
+LogFactory <|.. FileLogFactory
+LogFactory <|.. DatabaseLogFactory
+
+FileLog <.. FileLogFactory
+DatabaseLog <.. DatabaseLogFactory
+
+class Client
+
+Log <.. Client
+LogFactory <.. Client
+
+@enduml

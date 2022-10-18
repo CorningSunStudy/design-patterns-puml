@@ -1,0 +1,35 @@
+@startuml
+class Wizard {
+  - String name
+  + Wizard(String name)
+  + String getName()
+}
+
+interface WizardTower {
+  + {static} void enter(Wizard wizard)
+}
+
+Wizard <.. WizardTower
+
+class IvoryTower {
+  + void enter(Wizard wizard)
+}
+
+WizardTower <|.. IvoryTower
+
+class WizardTowerProxy {
+  - WizardTower tower
+  - int numWizards
+  + WizardTowerProxy(WizardTower tower)
+  + void enter(Wizard wizard)
+}
+note bottom
+public void enter(Wizard wizard) {
+  tower.enter(wizard);
+  numWizards++;
+}
+end note
+
+WizardTower <|.. WizardTowerProxy
+
+@enduml
